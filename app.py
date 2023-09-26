@@ -1,5 +1,6 @@
 import dash
-from dash import dcc, html, dash_table
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output
 
 import numpy as np
@@ -7,6 +8,7 @@ import pandas as pd
 import datetime
 from datetime import datetime as dt
 import pathlib
+from dash import dash_table
 
 app = dash.Dash(
     __name__,
@@ -216,7 +218,7 @@ app.layout = html.Div(
 )
 def update_heatmap(start, end, clinics, admit_type):
     start = start + " 00:00:00"
-    end = end + " 23:59:59"  # Change end time to the end of the selected day
+    end = end + " 00:00:00"
 
     return generate_patient_volume_heatmap(start, end, clinics, admit_type)
 
@@ -243,3 +245,4 @@ def update_patient_volume_table(clinics, admit_type):
 
 if __name__ == "__main__":
     app.run_server(debug=True, port=8051)
+
